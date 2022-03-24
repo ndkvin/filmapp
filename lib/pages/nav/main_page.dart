@@ -1,11 +1,14 @@
-import 'dart:ui';
-
+import 'package:filmapp/data/data.dart';
+import 'package:filmapp/data/movie_data.dart';
+import 'package:filmapp/data/tv_seris_data.dart';
+import 'package:filmapp/pages/detail_page.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatelessWidget {
   MainPage({ Key? key }) : super(key: key);
 
-  int star = 4;
+  List<data> MovieData = movie_data; 
+  List<data> TvSerisData = tv_seris; 
 
   @override
   Widget build(BuildContext context) {
@@ -105,60 +108,69 @@ class MainPage extends StatelessWidget {
               height: 310,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 5,
+                itemCount: MovieData.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    margin: const EdgeInsets.only(
-                      right: 20,
-                    ),
-                    height: 306,
-                    width: 200,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: 250,
-                          width: 190,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: const DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage(
-                                'assets/images/Avatar.png',
+                  data movie = MovieData[index];
+
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                        return DetailPage(dataDetail: movie,);
+                      }));
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(
+                        right: 20,
+                      ),
+                      height: 306,
+                      width: 200,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            height: 250,
+                            width: 190,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: AssetImage(
+                                  movie.image,
+                                )
                               )
                             )
-                          )
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(
-                            left: 4,
                           ),
-                          child: Text(
-                            'Avatar',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 4,
+                            ),
+                            child: Text(
+                              movie.name,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
-                        ),
-                        Row(
-                          children: [
-                            Wrap(
-                              children: List.generate(5, (index) {
-                                return Icon(
-                                  Icons.star_rate_rounded,
-                                  color: index + 1<= star ?const Color(0XFFFFA235) : const Color(0XFFE0E0E0),
-                                  size: 18,
-                                );
-                              }),
-                            )
-                          ],
-                        )
-                      ],
+                          Row(
+                            children: [
+                              Wrap(
+                                children: List.generate(5, (index) {
+                                  return Icon(
+                                    Icons.star_rate_rounded,
+                                    color: index + 1<= movie.rating ?const Color(0XFFFFA235) : const Color(0XFFE0E0E0),
+                                    size: 18,
+                                  );
+                                }),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   );
                 },
@@ -185,72 +197,83 @@ class MainPage extends StatelessWidget {
               ),
               height: 220,
               child: ListView.builder(
-                itemCount: 2,
+                itemCount: TvSerisData.length,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    height: 100,
-                    child: Row(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(
-                            bottom: 20,
-                          ),
-                          height: 76,
-                          width: 76,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(
-                                'assets/images/MaskGroup.png',
-                              )
+                  data TvSeris = TvSerisData[index];
+
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                        return DetailPage(dataDetail: TvSeris,);
+                      }));
+                    },
+                    child: Container(
+                      height: 100,
+                      child: Row(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(
+                              bottom: 20,
+                            ),
+                            height: 76,
+                            width: 76,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: AssetImage(
+                                  TvSeris.image,
+                                )
+                              ),
                             ),
                           ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(
-                            left: 10,
-                            bottom: 10
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.only(
-                                  top: 7,
-                                  bottom: 10
-                                ),
-                                child: const Text(
-                                  'Drama',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color(0XFF696D74),  
+                          Container(
+                            margin: const EdgeInsets.only(
+                              left: 10,
+                              bottom: 10
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.only(
+                                    top: 7,
+                                    bottom: 10
+                                  ),
+                                  child: Text(
+                                    TvSeris.genre[0],
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                      color: Color(0XFF696D74),  
+                                    ),
                                   ),
                                 ),
-                              ),
-                              const Text(
-                                'Behind Her Eyes',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white,  
+                                Text(
+                                  TvSeris.name,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white,  
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                child: Wrap(
-                                  children: List.generate(5, (index) {
-                                    return Icon(
-                                      Icons.star_rate_rounded,
-                                      color: index + 1<= star ?const Color(0XFFFFA235) : const Color(0XFFE0E0E0),
-                                      size: 18,
-                                    );
-                                  }),
-                                ),
-                              )
-                            ],
-                          ),
-                        )
-                      ]
+                                Container(
+                                  child: Wrap(
+                                    children: List.generate(5, (index) {
+                                      return Icon(
+                                        Icons.star_rate_rounded,
+                                        color: index + 1<= TvSeris.rating?const Color(0XFFFFA235) : const Color(0XFFE0E0E0),
+                                        size: 18,
+                                      );
+                                    }),
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ]
+                      ),
                     ),
                   );
                 },

@@ -1,4 +1,3 @@
-import 'package:filmapp/pages/detail_page.dart';
 import 'package:filmapp/pages/home_page.dart';
 import 'package:flutter/material.dart';
 void main() {
@@ -14,7 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Film App',
       theme: ThemeData(scaffoldBackgroundColor: const Color(0XFF1B1E25)),
-      home: const DetailPage(),
+      home: const HomePage(),
     );
   }
 }

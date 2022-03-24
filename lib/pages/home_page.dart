@@ -1,10 +1,10 @@
 // ignore_for_file: unnecessary_new
-
 import 'package:filmapp/pages/nav/bookmark_page.dart';
 import 'package:filmapp/pages/nav/main_page.dart';
 import 'package:filmapp/pages/nav/profile_page.dart';
 import 'package:filmapp/pages/nav/search_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({ Key? key }) : super(key: key);
@@ -34,12 +34,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      body: pages[currentIndex],
-      bottomNavigationBar: new Theme(
+      body: MediaQuery.of(context).size.width <=600 ? pages[currentIndex] : pages[0],
+      bottomNavigationBar: MediaQuery.of(context).size.width <=600 ? Theme(
         data: Theme.of(context).copyWith(
-          canvasColor: Color.fromARGB(255, 50, 52, 61),
+          canvasColor: const Color.fromARGB(255, 50, 52, 61),
         ),
-        child: new BottomNavigationBar(
+        child: BottomNavigationBar(
           unselectedFontSize: 0,
           selectedFontSize: 0,
           selectedItemColor: const Color(0XFF546EE5),
@@ -68,6 +68,9 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
+      ) : Container(
+        height: 0,
+        width: 0,
       ),
     );
   }
