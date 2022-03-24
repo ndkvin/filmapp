@@ -14,7 +14,7 @@ List<data> movie_data = [
     rating: 5,
     image: 'assets/images/Avatar.png',
   ),
-    data(
+  data(
     name: 'Joker',
     director: 'Todd Phillips',
     genre: [

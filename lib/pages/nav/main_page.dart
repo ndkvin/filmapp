@@ -111,7 +111,6 @@ class MainPage extends StatelessWidget {
                 itemCount: MovieData.length,
                 itemBuilder: (BuildContext context, int index) {
                   data movie = MovieData[index];
-
                   return InkWell(
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -133,7 +132,6 @@ class MainPage extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               image: DecorationImage(
-                                fit: BoxFit.fill,
                                 image: AssetImage(
                                   movie.image,
                                 )
@@ -201,7 +199,6 @@ class MainPage extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
                   data TvSeris = TvSerisData[index];
-
                   return InkWell(
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context) {
