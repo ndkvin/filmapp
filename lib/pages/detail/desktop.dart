@@ -1,25 +1,14 @@
 import 'package:filmapp/data/data.dart';
 import 'package:flutter/material.dart';
 
-class DesktopDetail extends StatefulWidget {
+class DesktopDetail extends StatelessWidget {
+
   data dataDetail;
 
-  DesktopDetail({ 
+  DesktopDetail({
     Key? key,
-    required this.dataDetail, 
+    required this.dataDetail
   }) : super(key: key);
-
-  @override
-  State<DesktopDetail> createState() => _DesktopDetailState(dataDetail: dataDetail);
-}
-
-class _DesktopDetailState extends State<DesktopDetail> {
-
-  data dataDetail;
-
-  _DesktopDetailState({
-    required this.dataDetail, 
-  });
 
   @override
   Widget build(BuildContext context) {

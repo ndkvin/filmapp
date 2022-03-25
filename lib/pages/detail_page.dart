@@ -1,7 +1,6 @@
 import 'package:filmapp/data/data.dart';
 import 'package:filmapp/pages/detail/desktop.dart';
 import 'package:filmapp/pages/detail/mobile.dart';
-import 'package:filmapp/widget/expandeable_text.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatefulWidget {

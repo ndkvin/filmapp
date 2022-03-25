@@ -1,5 +1,4 @@
 import 'package:filmapp/data/data.dart';
-import 'package:filmapp/widget/expandeable_text.dart';
 import 'package:flutter/material.dart';
 
 
@@ -22,6 +21,25 @@ class _DetailMobileState extends State<DetailMobile> {
   _DetailMobileState({
     required this.dataDetail, 
   });
+
+  late String firstHalf;
+  late String secondHalf;
+
+  bool hiddenText = true;
+  double textHeight = 200;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if(widget.dataDetail.storyLine.length>textHeight) {
+      firstHalf = widget.dataDetail.storyLine.substring(0, textHeight.toInt());
+      secondHalf = widget.dataDetail.storyLine.substring(textHeight.toInt() + 1, widget.dataDetail.storyLine.length);
+    } else {
+      firstHalf = widget.dataDetail.storyLine;
+      secondHalf = '';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -199,8 +217,52 @@ class _DetailMobileState extends State<DetailMobile> {
                   right: 30,
                   top: 30,
                 ),
-                child: ExpandableText(
-                  text: dataDetail.storyLine,
+                child: Container(
+                  child: secondHalf.isEmpty ? Text(
+                    firstHalf,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0XFF696D74),
+                    ),
+                  ) : Column(
+                    children: [
+                      Text(
+                        hiddenText ? firstHalf + '...' : firstHalf + secondHalf,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: Color(0XFF696D74),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            hiddenText = !hiddenText;
+                          });
+                        },
+                        child: Row(
+                          children: [
+                            hiddenText ? const Text(
+                              'Show more',
+                              style: TextStyle(
+                                color: Color(0XFF546EE5),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ) : const Text(
+                              'Show less',
+                              style: TextStyle(
+                                color: Color(0XFF546EE5),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 )
               ),
               const SizedBox(
